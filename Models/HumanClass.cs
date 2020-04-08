@@ -1,8 +1,8 @@
 using System;
 
-namespace Human
+namespace Human.Models
 {
-    public class Human
+    public class HumanClass
     {
         public string Name;
         public int Strength;
@@ -18,7 +18,7 @@ namespace Human
             }
         }
 
-        public Human(string name)
+        public HumanClass(string name)
         {
             Name = name;
             Strength = 3;
@@ -26,7 +26,7 @@ namespace Human
             Dexterity = 3;
             health = 100;
         }
-        public Human(string name, int Str, int Int, int Dex, int Health )
+        public HumanClass(string name, int Str, int Int, int Dex, int Health )
         {
             Name = name;
             Strength = Str;
@@ -35,9 +35,9 @@ namespace Human
             health = Health;
         }
 
-        public int Attack(Human target)
+        public int Attack(HumanClass target)
         {
-            if( target is Human)
+            if( target is HumanClass)
             {
                 int dmg = 5 * Strength;
                 target.health -= dmg;
