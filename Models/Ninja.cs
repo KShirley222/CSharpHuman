@@ -5,12 +5,17 @@ namespace Human.Models
 {
     public class Ninja : HumanClass
     {
+        Random rand = new Random();
         private int calorieIntake;
         public List<Food> FoodHistory;
         public Ninja(string name) : base(name)
         {
             calorieIntake = 0;
             FoodHistory = new List<Food>();
+        }
+        public Ninja(string name, int str, int intel, int hp) : base(name, str, 175, intel, hp)
+        {
+             Console.WriteLine($"{name} is a Ninja");
         }
 
         public bool IsFull{
@@ -35,6 +40,43 @@ namespace Human.Models
             else{
                 calorieIntake += item.Calories;
             }
+        }
+
+        public override int Attack( HumanClass target )
+        {
+            if( target is HumanClass)
+            {
+                int critical = rand.Next(1,6);
+                int dmg = 5 * Dexterity;
+
+                if(critical == 1){
+                    dmg+= 10;
+                    target.Health -= dmg;
+                    Console.WriteLine($"{this.Name} critically  kicked {target.Name} in the face! ");
+                    Console.WriteLine($"{target.Name} took {dmg} damage and has {target.Health} health left.");
+                    return target.Health;
+                }else{
+                    target.Health -= dmg;
+                    Console.WriteLine($"{Name} kicked {target.Name}! ");
+                    Console.WriteLine($"{target.Name} took {dmg} damage and has {target.Health} health left.");
+                    
+                    return target.Health;
+
+                }
+            }
+            else
+            {
+                throw new Exception("You can't attack that!");
+            }
+        }  
+        public void Steal(HumanClass target)
+        {
+            int stealHealth = 5; 
+            target.Health -= stealHealth;
+            this.Health = this.Health + stealHealth;
+            Console.WriteLine($"{target.Name} took {stealHealth} damage and has {target.Health} health left.");
+            Console.WriteLine($"{this.Name} took {stealHealth}  health from {target.Name} and has {this.Health} health left.");
+
         }
     }
 }

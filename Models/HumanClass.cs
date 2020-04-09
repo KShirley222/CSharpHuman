@@ -8,13 +8,16 @@ namespace Human.Models
         public int Strength;
         public int Intelligence;
         public int Dexterity;
-        private int health;
+        protected int health;
 
         public int Health
         {
             get
             {
                return health; 
+            }
+            set{
+                health = value;
             }
         }
 
@@ -35,19 +38,24 @@ namespace Human.Models
             health = Health;
         }
 
-        public int Attack(HumanClass target)
+        public virtual int Attack(HumanClass target)
         {
             if( target is HumanClass)
             {
                 int dmg = 5 * Strength;
                 target.health -= dmg;
-                Console.WriteLine($"{Name} devlivered a punishing blow to {target.Name}! ");
+                Console.WriteLine($"{Name} devlivered a punishing blow to {target.Name} dealing {dmg} damage! ");
                 return target.health;
             }
             else
             {
                 throw new Exception("You can't attack that!");
             }
+        }
+
+        public void DisplayStats()
+        {
+            Console.WriteLine($"{Name} has {Strength} str, {Intelligence} int, {Dexterity} dex, and {Health} health.");
         }
     }
 }

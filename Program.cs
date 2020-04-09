@@ -17,6 +17,19 @@ namespace Human
             carol.Eat(firstBuffet.Serve());
             carol.Eat(firstBuffet.Serve());
             carol.Eat(firstBuffet.Serve());
+            Wizard kyle = new Wizard("Kyle", 17, 19);
+            Ninja steve = new Ninja("Steve",17, 19, 150 );
+            Samurai john = new Samurai("John", 17, 19,80);
+            kyle.DisplayStats();
+            steve.DisplayStats();
+            john.DisplayStats();
+            // kyle.Attack(steve);
+            steve.Attack(kyle);
+            kyle.DisplayStats();
+            john.Attack(steve);
+            kyle.Heal(steve);
+            john.Meditate();
+            steve.Steal(kyle);
         }
     }
 }
